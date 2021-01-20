@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: my-service-mongo
+    restart: always
+    ports:
+      - 27017:27017
+
+  simian:
+    image: simian:latest
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_HOST: 'mongodb'
+    deploy:
+      resources:
+        limits:
+          memory: 350m
+        reservations:
+          memory: 100m
